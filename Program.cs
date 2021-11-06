@@ -10,77 +10,60 @@ namespace Úkol_Tagy
         {
             Regex rx = new Regex("<Capital>" + ".*" + "</Capital>");
             MatchCollection match = rx.Matches(input);
-            List<string> txtm = new List<string>();
             string m = string.Empty;
             for (int x = 0; x < match.Count; x++)
             {
-                m.Replace("<Capital>", "");
-                m.Replace("</Capital>", "");
                 m = match[x].ToString();
-                m.ToUpper();
-                txtm.Add(m);
-            }
-            for (int v = 0; v < match.Count; v++)
-            {
-                input.Replace(m, txtm[v]);
+                m = m.Replace("<Capital>", "");
+                m = m.Replace("</Capital>", "");
+                m = m.ToUpper();
+                input =  input.Replace(match[x].ToString(), m);
             }
         }
         public static void TagMarker(ref string input)
         {
             Regex rx = new Regex("<Marker>" + ".*" + "</Marker>");
             MatchCollection match = rx.Matches(input);
-            List<string> txtm = new List<string>();
             string m = string.Empty;
             for (int x = 0; x < match.Count; x++)
             {
-                m.Replace("<Marker>", "");
-                m.Replace("</Marker>", "");
                 m = "***" + match[x].ToString() + "***";
-                m.ToUpper();
-                txtm.Add(m);
-            }
-            for (int v = 0; v < match.Count; v++)
-            {
-                input.Replace(m, txtm[v]);
+                m = m.Replace("<Marker>", "");
+                m = m.Replace("</Marker>", "");              
+                m = m.ToUpper();
+                input = input.Replace(match[x].ToString(), m);
             }
         }
         public static void TagHide(ref string input)
         {
             Regex rx = new Regex("<Hide>" + ".*" + "</Hide>");
             MatchCollection match = rx.Matches(input);
-            List<string> txtm = new List<string>();
             string m = string.Empty;
+            string t = string.Empty;
             for (int x = 0; x < match.Count; x++)
             {
-                m.Replace("<Hide>", "");
-                m.Replace("</Hide>", "");
-                for (int h = 0; h < match[x].ToString().Length; h++)
+                t = match[x].ToString();
+                t = t.Replace("<Hide>", "");
+                t = t.Replace("</Hide>", "");
+                foreach (char c in t) 
                 {
                     m += "*";
                 }
-                txtm.Add(m);
-            }
-            for (int v = 0; v < match.Count; v++)
-            {
-                input.Replace(m, txtm[v]);
+                input = input.Replace(match[x].ToString(), m);
             }
         }
         public static void TagHash(ref string input)
         {
             Regex rx = new Regex("<Hash>" + ".*" + "</Hash>");
             MatchCollection match = rx.Matches(input);
-            List<string> txtm = new List<string>();
             string m = string.Empty;
             for (int x = 0; x < match.Count; x++)
             {
-                m.Replace("<Hash>", "");
-                m.Replace("</Hash>", "");
-                m.GetHashCode();
-                txtm.Add(m);
-            }
-            for (int v = 0; v < match.Count; v++)
-            {
-                input.Replace(m, txtm[v]);
+                m = match[x].ToString();
+                m = m.Replace("<Hash>", "");
+                m = m.Replace("</Hash>", "");
+                m = m.GetHashCode().ToString();
+                input = input.Replace(match[x].ToString(), m);
             }
         }
 
